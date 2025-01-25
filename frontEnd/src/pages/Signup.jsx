@@ -1,7 +1,48 @@
-import { Button, TextInput, Label } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Button, TextInput, Label, Alert, Spinner } from "flowbite-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
+
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.id]: e.target.value.trim()});
+  };
+  
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if(!formData.username || !formData.email || !formData.password) {
+      return setErrorMessage('Plese fill out all fields');
+    }
+    try{
+      setLoading(true);
+      setErrorMessage(null);
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if(data.success === false) {
+        return setErrorMessage(data.message)
+      }
+      setLoading(false);
+      
+      if(res.ok) {
+        navigate('/sign-in');
+      }
+    }
+    catch(error){
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       {/* Left Section: Logo */}
@@ -15,7 +56,7 @@ export default function Signup() {
 
       {/* Right Section: Sign Up Form */}
       <div className="bg-white p-10 rounded-lg shadow-lg ml-10 w-full max-w-md">
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* Username Input */}
           <div className="mb-4">
             <Label htmlFor="username" className="mb-2 block">
@@ -25,7 +66,22 @@ export default function Signup() {
               id="username"
               type="text"
               placeholder="Enter your username"
+              onChange={handleChange}
                 
+              
+            />
+          </div>
+
+           {/* Email Input */}
+           <div className="mb-6">
+            <Label htmlFor="email" className="mb-2 block">
+              Your email
+            </Label>
+            <TextInput
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={handleChange}
               
             />
           </div>
@@ -39,27 +95,25 @@ export default function Signup() {
               id="password"
               type="password"
               placeholder="Enter your password"
+              onChange={handleChange}
               
             />
           </div>
 
-          {/* Email Input */}
-          <div className="mb-6">
-            <Label htmlFor="email" className="mb-2 block">
-              Your email
-            </Label>
-            <TextInput
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              
-            />
-          </div>
+         
 
           {/* Sign Up Button */}
           <div className="mb-4">
-            <Button type="submit" className="w-full bg-blue-700 ">
-              Sign Up
+            <Button type="submit" className="w-full bg-blue-700 "
+            disabled ={loading}>
+              {loading ? (
+                <>
+                <Spinner/>
+                <span>Loading...</span>
+                </>
+                
+                
+                ) : 'Sign Up'}
             </Button>
           </div>
 
@@ -80,8 +134,16 @@ export default function Signup() {
               Sign In
             </Link>
           </p>
+          {
+        errorMessage && (
+          <Alert className="flex items-center mt-2">
+            {errorMessage}
+          </Alert>
+        )
+      }
         </form>
       </div>
+     
     </div>
   )
 }
