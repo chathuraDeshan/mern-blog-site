@@ -129,7 +129,7 @@ export default function Signup() {
 
           {/* Already have an account */}
           <p className="text-sm text-gray-500 text-center">
-            Don’t have an account?{" "}
+            Have an account?{" "}
             <Link to="/sign-in" className="text-blue-600 hover:underline">
               Sign In
             </Link>
