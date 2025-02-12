@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import {signInStart,signInSuccess,signInFailure} from '../redux/user/userSlice';
+import OAuth from "../components/OAuth";
 
 export default function Signin() {
 
@@ -106,14 +107,7 @@ export default function Signin() {
           </div>
 
           {/* Continue with Google */}
-          <div className="mb-6">
-            <Button
-              type="button"
-              className="w-full bg-gray-300 text-black hover:bg-gray-200 border border-gray-300"
-            >
-              Continue with Google
-            </Button>
-          </div>
+          <OAuth/>
 
           {/* Already have an account */}
           <p className="text-sm text-gray-500 text-center">
