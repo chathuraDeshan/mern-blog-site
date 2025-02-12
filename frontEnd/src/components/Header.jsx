@@ -1,10 +1,12 @@
-import { Navbar, TextInput, Button } from "flowbite-react";
+import { Navbar, TextInput, Button, Dropdown, Avatar } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
+import {useSelector} from 'react-redux';
 
 export default function Header() {
   const path = useLocation().pathname;
+  const {currentUser} = useSelector(state => state.user);
 
   return (
     <header className="border-b-2">
@@ -42,7 +44,7 @@ export default function Header() {
             </Button>
 
             {/* Theme Toggle */}
-            <Button
+            <Button 
               className="w-10 h-10 hidden sm:flex items-center "
               color="gray"
             >
@@ -50,11 +52,47 @@ export default function Header() {
             </Button>
 
             {/* Sign-In Button */}
-            <Link to="/sign-in">
+            {currentUser ? (
+              <Dropdown
+
+                arrowIcon = {false}
+                  inline
+                  label = {
+                    <Avatar
+                      size="sm"
+                      img={currentUser.profilePicture}
+                      rounded
+                    />
+                }
+              
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm">@{currentUser.username}</span>
+                  <span className="block text-sm font-medium truncate">{currentUser.email}</span>
+                </Dropdown.Header>
+
+                <Link to={'/dashbord?tab=profile'}>
+                  <Dropdown.Item>
+                    Profile
+                  </Dropdown.Item>
+                </Link>
+
+                <Dropdown.Item>
+                    Sign Out
+                </Dropdown.Item>
+                
+                
+              </Dropdown>
+            ) : (
+              <Link to="/sign-in">
               <Button className="text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700">
                 Sign In
               </Button>
             </Link>
+            )}
+
+            
+            
 
             {/* Mobile Menu Toggle */}
             <Navbar.Toggle />
