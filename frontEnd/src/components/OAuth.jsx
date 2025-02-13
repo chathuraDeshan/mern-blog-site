@@ -40,7 +40,7 @@ function OAuth() {
     <div className="mb-6">
             <Button
               type="button"
-              className="w-full bg-gray-300 text-black hover:bg-gray-200 border border-gray-300"
+              className="w-full bg-gray-300 text-black hover:bg-gray-200 border border-gray-300 dark:bg-white"
               onClick={handleGoogle}
             >
             <AiFillGoogleCircle  className='w-6 h-6 mr-2'/>

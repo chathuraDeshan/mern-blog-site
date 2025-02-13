@@ -6,7 +6,7 @@ const FooterCom = () => {
         <Footer container className="bg-white text-blue-700 border-t border-gray-200">
       <div className="w-full py-8 px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Site Name */}
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 dark:text-white">
           <h2 className="text-2xl font-bold">TEC TALK</h2>
           <p className="text-sm mt-2">The Technology Is Arrival</p>
         </div>
@@ -47,13 +47,13 @@ const FooterCom = () => {
             Follow Us
           </Footer.Title>
           <div className="flex gap-4 mt-2">
-            <Footer.Link href="https://linkedin.com" className="hover:text-blue-500">
-              <FaLinkedin className="w-6 h-6" />
+            <Footer.Link href="https://linkedin.com" className="hover:text-blue-500 dark:text-white">
+              <FaLinkedin className="w-6 h-6 " />
             </Footer.Link>
-            <Footer.Link href="https://twitter.com" className="hover:text-blue-500">
+            <Footer.Link href="https://twitter.com" className="hover:text-blue-500 dark:text-white">
               <FaTwitter className="w-6 h-6" />
             </Footer.Link>
-            <Footer.Link href="https://github.com" className="hover:text-blue-500">
+            <Footer.Link href="https://github.com" className="hover:text-blue-500 dark:text-white">
               <FaGithub className="w-6 h-6" />
             </Footer.Link>
           </div>

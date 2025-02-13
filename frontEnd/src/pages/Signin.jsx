@@ -46,9 +46,9 @@ export default function Signin() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-400">
       {/* Left Section: Logo */}
-      <div className="bg-blue-700 text-white flex flex-col justify-center items-center p-10 rounded-lg shadow-lg md:flex-col md:items-center">
+      <div className="bg-blue-700 text-white flex flex-col justify-center items-center p-10 rounded-lg shadow-lg md:flex-col md:items-center dark:bg-gray-700">
         <h1 className="text-6xl font-bold tracking-wider">T</h1>
         <h1 className="text-6xl font-bold tracking-wider mt-2">E</h1>
         <h1 className="text-6xl font-bold tracking-wider mt-2">C</h1>
@@ -57,7 +57,7 @@ export default function Signin() {
       </div>
 
       {/* Right Section: Sign Up Form */}
-      <div className="bg-white p-10 rounded-lg shadow-lg ml-10 w-full max-w-md">
+      <div className="bg-white p-10 rounded-lg shadow-lg ml-10 w-full max-w-md dark:bg-gray-700">
         <form onSubmit={handleSubmit}>
          
 
@@ -71,6 +71,7 @@ export default function Signin() {
               type="email"
               placeholder="Enter your email"
               onChange={handleChange}
+              
               
             />
           </div>
@@ -93,7 +94,7 @@ export default function Signin() {
 
           {/* Sign Up Button */}
           <div className="mb-4">
-            <Button type="submit" className="w-full bg-blue-700 "
+            <Button type="submit" className="w-full bg-blue-700 dark:bg-white text-black "
             disabled ={loading}>
               {loading ? (
                 <>
@@ -110,7 +111,7 @@ export default function Signin() {
           <OAuth/>
 
           {/* Already have an account */}
-          <p className="text-sm text-gray-500 text-center">
+          <p className="text-sm text-gray-500 text-center dark:text-white">
             Don’t have an account?{" "}
             <Link to="/sign-up" className="text-blue-600 hover:underline">
               Sign Up
